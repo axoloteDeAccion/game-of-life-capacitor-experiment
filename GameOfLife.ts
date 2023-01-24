@@ -1,7 +1,7 @@
 class GameOfLifeTS {
     cellSize = 5;
-    deadColor = '#181818';
-    aliveColor = "#FF756B";
+    deadColor = '#6cc8f6';
+    aliveColor = "#df47ce";
     cellsInColumn: number;
     cellsInRows: number;
     active: number[][] = [];

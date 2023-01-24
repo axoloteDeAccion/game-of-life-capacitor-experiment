@@ -1,8 +1,8 @@
 var GameOfLifeTS = /** @class */ (function () {
     function GameOfLifeTS(board) {
         this.cellSize = 5;
-        this.deadColor = '#181818';
-        this.aliveColor = "#FF756B";
+        this.deadColor = '#6cc8f6';
+        this.aliveColor = "#df47ce";
         this.active = [];
         this.inactive = [];
         this.cellsInColumn = Math.floor(board.width / this.cellSize);
