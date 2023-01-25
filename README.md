@@ -2,7 +2,7 @@
 
 ![Gif of the implementation working](example.gif)
 
-I took [this implementation](https://levelup.gitconnected.com/conways-game-of-life-in-javascript-9498ae1958fe) and did the following small changes on my implementation:
+I took [this as reference](https://levelup.gitconnected.com/conways-game-of-life-in-javascript-9498ae1958fe) and did the following small changes on my implementation:
 
 - Used Typescript instead of Javascript
 - Changed how arrays are filled and iteretated on. Really just to see what would happen, as the loops in the original example were fine
