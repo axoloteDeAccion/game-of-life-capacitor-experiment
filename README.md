@@ -2,9 +2,9 @@
 
 ![Gif of the implementation working](example.gif)
 
-I took [this implementation](https://levelup.gitconnected.com/conways-game-of-life-in-javascript-9498ae1958fe) and did the following changes
+I took [this implementation](https://levelup.gitconnected.com/conways-game-of-life-in-javascript-9498ae1958fe) as a base and did the following small changes to my implementation:
 
-- Sloppily ported it to Typescript
+- Used Typescript instead of Javascript
 - Changed how arrays are filled and iteretated on. Really just to see what would happen, as the loops in the original implmentation were fine
 - Made the size of the grid dynamic, so it'd adjust to different screen sizes
 
