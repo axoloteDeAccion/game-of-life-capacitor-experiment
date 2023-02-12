@@ -3,6 +3,24 @@ var GameOfLifeTS = /** @class */ (function () {
         this.cellSize = 5;
         this.deadColor = '#6cc8f6';
         this.aliveColor = "#df47ce";
+        this.colorPalette = [
+            "#1a1c2c",
+            "#5d275d",
+            "#b13e53",
+            "#ef7d57",
+            "#ffcd75",
+            "#a7f070",
+            "#38b764",
+            "#257179",
+            "#29366f",
+            "#3b5dc9",
+            "#41a6f6",
+            "#73eff7",
+            "#f4f4f4",
+            "#94b0c2",
+            "#566c86",
+            "#333c57",
+        ];
         this.active = [];
         this.cellsInColumn = Math.floor(board.width / this.cellSize);
         this.cellsInRows = Math.floor(board.height / this.cellSize);
@@ -27,7 +45,7 @@ var GameOfLifeTS = /** @class */ (function () {
             x.forEach(function (y, j) {
                 var color;
                 if (y == 1)
-                    color = _this.aliveColor;
+                    color = _this.colorPalette[Math.floor(Math.random() * 15)];
                 else
                     color = _this.deadColor;
                 _this.context.fillStyle = color;
