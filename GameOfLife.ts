@@ -1,24 +1,36 @@
 class GameOfLifeTS {
     cellSize = 5;
     deadColor = '#000000';
-    colorPalette: string[] = [
-        "#1a1c2c",
-        "#5d275d",
-        "#b13e53",
-        "#ef7d57",
-        "#ffcd75",
-        "#a7f070",
-        "#38b764",
-        "#257179",
-        "#29366f",
-        "#3b5dc9",
-        "#41a6f6",
-        "#73eff7",
-        "#f4f4f4",
-        "#94b0c2",
-        "#566c86",
-        "#333c57",
+    colorPalettes: string[][] = [
+        [
+            "#1a1c2c",
+            "#5d275d",
+            "#b13e53",
+            "#ef7d57",
+            "#ffcd75",
+            "#a7f070",
+            "#38b764",
+            "#257179",
+            "#29366f",
+            "#3b5dc9",
+            "#41a6f6",
+            "#73eff7",
+            "#f4f4f4",
+            "#94b0c2",
+            "#566c86",
+            "#333c57",
+        ],
+        [
+            "#ffffff",
+            "#0ce6f2",
+            "#0098db",
+            "#1e579c",
+            "#203562",
+            "#252446",
+            "#201533",
+        ],
     ];
+    colorPalette: string[] = this.colorPalettes[1];
     cellsInColumn: number;
     cellsInRows: number;
     active: number[][] = [];
@@ -50,7 +62,7 @@ class GameOfLifeTS {
             x.forEach((y, j) => {
                 let color: string;
                 if(y == 1)
-                    color = this.colorPalette[Math.floor(Math.random() * 15)];
+                    color = this.colorPalette[Math.floor(Math.random() * this.colorPalette.length - 1)];
                 else
                     color = this.deadColor;
                 this.context.fillStyle = color;
