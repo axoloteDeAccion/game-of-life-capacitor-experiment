@@ -20,13 +20,12 @@ window.onload = () => {
     document.querySelector("#reset").addEventListener("click", () => {
         isRunning = false;
         game.randomize();
-        game.paint()        
     });
 
     const gameLoop = () => {
         if(isRunning) game.run();
+        game.paint();
         window.requestAnimationFrame(gameLoop);
     };
     window.requestAnimationFrame(gameLoop);
-    game.paint();
 };

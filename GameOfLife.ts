@@ -1,6 +1,6 @@
 class GameOfLifeTS {
     cellSize = 5;
-    deadColor = '#6cc8f6';
+    deadColor = '#000000';
     colorPalette: string[] = [
         "#1a1c2c",
         "#5d275d",
@@ -113,6 +113,5 @@ class GameOfLifeTS {
 
     run() {
         this.updateLifeCycle();
-        this.paint();
     }
 };

@@ -1,8 +1,7 @@
 var GameOfLifeTS = /** @class */ (function () {
     function GameOfLifeTS(board) {
         this.cellSize = 5;
-        this.deadColor = '#6cc8f6';
-        this.aliveColor = "#df47ce";
+        this.deadColor = '#000000';
         this.colorPalette = [
             "#1a1c2c",
             "#5d275d",
@@ -102,7 +101,6 @@ var GameOfLifeTS = /** @class */ (function () {
     };
     GameOfLifeTS.prototype.run = function () {
         this.updateLifeCycle();
-        this.paint();
     };
     return GameOfLifeTS;
 }());
