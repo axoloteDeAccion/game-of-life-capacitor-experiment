@@ -4,18 +4,16 @@ var GameOfLifeTS = /** @class */ (function () {
         this.deadColor = '#6cc8f6';
         this.aliveColor = "#df47ce";
         this.active = [];
-        this.inactive = [];
         this.cellsInColumn = Math.floor(board.width / this.cellSize);
         this.cellsInRows = Math.floor(board.height / this.cellSize);
         this.context = board.getContext("2d");
     }
-    GameOfLifeTS.prototype.arrayInitialization = function () {
+    GameOfLifeTS.prototype.initialize = function () {
         var _this = this;
         // TODO This seems to have been already taken care of in the new standard lib. Check that out
         this.active = Array.from({ length: this.cellsInRows }, function () { return (Array.from({ length: _this.cellsInColumn }, function () { return 0; })); });
-        this.inactive = this.active.slice();
     };
-    GameOfLifeTS.prototype.arrayRandomize = function () {
+    GameOfLifeTS.prototype.randomize = function () {
         var _this = this;
         this.active.forEach(function (x, i) {
             x.forEach(function (_, j) {
@@ -23,7 +21,7 @@ var GameOfLifeTS = /** @class */ (function () {
             });
         });
     };
-    GameOfLifeTS.prototype.fillArray = function () {
+    GameOfLifeTS.prototype.paint = function () {
         var _this = this;
         this.active.forEach(function (x, i) {
             x.forEach(function (y, j) {
@@ -37,7 +35,7 @@ var GameOfLifeTS = /** @class */ (function () {
             });
         });
     };
-    GameOfLifeTS.prototype.setCellValueHelper = function (row, col) {
+    GameOfLifeTS.prototype.getCellValue = function (row, col) {
         try {
             return this.active[row][col];
         }
@@ -47,14 +45,14 @@ var GameOfLifeTS = /** @class */ (function () {
     };
     GameOfLifeTS.prototype.countNeighbours = function (row, col) {
         var totalNeighbours = 0;
-        totalNeighbours += this.setCellValueHelper(row - 1, col - 1);
-        totalNeighbours += this.setCellValueHelper(row - 1, col);
-        totalNeighbours += this.setCellValueHelper(row - 1, col + 1);
-        totalNeighbours += this.setCellValueHelper(row, col - 1);
-        totalNeighbours += this.setCellValueHelper(row, col + 1);
-        totalNeighbours += this.setCellValueHelper(row + 1, col - 1);
-        totalNeighbours += this.setCellValueHelper(row + 1, col);
-        totalNeighbours += this.setCellValueHelper(row + 1, col + 1);
+        totalNeighbours += this.getCellValue(row - 1, col - 1);
+        totalNeighbours += this.getCellValue(row - 1, col);
+        totalNeighbours += this.getCellValue(row - 1, col + 1);
+        totalNeighbours += this.getCellValue(row, col - 1);
+        totalNeighbours += this.getCellValue(row, col + 1);
+        totalNeighbours += this.getCellValue(row + 1, col - 1);
+        totalNeighbours += this.getCellValue(row + 1, col);
+        totalNeighbours += this.getCellValue(row + 1, col + 1);
         return totalNeighbours;
     };
     GameOfLifeTS.prototype.updateCellValue = function (row, col) {
@@ -76,17 +74,16 @@ var GameOfLifeTS = /** @class */ (function () {
         for (var i = 0; i < this.cellsInRows; i++) {
             for (var j = 0; j < this.cellsInColumn; j++) {
                 var new_state = this.updateCellValue(i, j);
-                this.inactive[i][j] = new_state;
+                this.active[i][j] = new_state;
             }
         }
-        this.active = this.inactive.slice();
     };
-    GameOfLifeTS.prototype.gameSetup = function () {
-        this.arrayInitialization();
+    GameOfLifeTS.prototype.setup = function () {
+        this.initialize();
     };
-    GameOfLifeTS.prototype.runGame = function () {
+    GameOfLifeTS.prototype.run = function () {
         this.updateLifeCycle();
-        this.fillArray();
+        this.paint();
     };
     return GameOfLifeTS;
 }());

@@ -5,7 +5,6 @@ class GameOfLifeTS {
     cellsInColumn: number;
     cellsInRows: number;
     active: number[][] = [];
-    inactive: number[][] = [];
     context: CanvasRenderingContext2D;
 
     constructor(board: HTMLCanvasElement) {
@@ -14,24 +13,22 @@ class GameOfLifeTS {
         this.context = board.getContext("2d") as CanvasRenderingContext2D;
     }
 
-    arrayInitialization() {
+    initialize() {
         // TODO This seems to have been already taken care of in the new standard lib. Check that out
         this.active = Array.from({ length: this.cellsInRows }, () => (
             Array.from({ length: this.cellsInColumn }, () => 0)
         ));
-
-        this.inactive = this.active.slice();
     }
 
-    arrayRandomize() {
+    randomize() {
         this.active.forEach((x, i) => {
             x.forEach((_, j) => {
                 this.active[i][j] = (Math.random() > 0.5) ? 1 : 0;
-            })
-        })
+            });
+        });
     }
 
-    fillArray() {
+    paint() {
         this.active.forEach((x, i) => {
             x.forEach((y, j) => {
                 let color: string;
@@ -45,7 +42,7 @@ class GameOfLifeTS {
         });
     }
 
-    setCellValueHelper(row: number, col: number): number {
+    getCellValue(row: number, col: number): number {
         try {
             return this.active[row][col];
         }
@@ -56,14 +53,14 @@ class GameOfLifeTS {
 
     countNeighbours(row: number, col: number): number {
         let totalNeighbours = 0;
-        totalNeighbours += this.setCellValueHelper(row - 1, col - 1);
-        totalNeighbours += this.setCellValueHelper(row - 1, col);
-        totalNeighbours += this.setCellValueHelper(row - 1, col + 1);
-        totalNeighbours += this.setCellValueHelper(row, col - 1);
-        totalNeighbours += this.setCellValueHelper(row, col + 1);
-        totalNeighbours += this.setCellValueHelper(row + 1, col - 1);
-        totalNeighbours += this.setCellValueHelper(row + 1, col);
-        totalNeighbours += this.setCellValueHelper(row + 1, col + 1);
+        totalNeighbours += this.getCellValue(row - 1, col - 1);
+        totalNeighbours += this.getCellValue(row - 1, col);
+        totalNeighbours += this.getCellValue(row - 1, col + 1);
+        totalNeighbours += this.getCellValue(row, col - 1);
+        totalNeighbours += this.getCellValue(row, col + 1);
+        totalNeighbours += this.getCellValue(row + 1, col - 1);
+        totalNeighbours += this.getCellValue(row + 1, col);
+        totalNeighbours += this.getCellValue(row + 1, col + 1);
         return totalNeighbours;
     }
 
@@ -87,18 +84,17 @@ class GameOfLifeTS {
         for (let i = 0; i < this.cellsInRows; i++) {
             for (let j = 0; j < this.cellsInColumn; j++) {
                 let new_state = this.updateCellValue(i, j);
-                this.inactive[i][j] = new_state;
+                this.active[i][j] = new_state;
             }
         }
-        this.active = this.inactive.slice();
     }
 
-    gameSetup() {
-        this.arrayInitialization();
+    setup() {
+        this.initialize();
     }
 
-    runGame() {
+    run() {
         this.updateLifeCycle();
-        this.fillArray();
+        this.paint();
     }
 };
