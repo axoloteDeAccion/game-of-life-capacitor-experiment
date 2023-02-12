@@ -80,6 +80,7 @@ var GameOfLifeTS = /** @class */ (function () {
     };
     GameOfLifeTS.prototype.setup = function () {
         this.initialize();
+        this.randomize();
     };
     GameOfLifeTS.prototype.run = function () {
         this.updateLifeCycle();

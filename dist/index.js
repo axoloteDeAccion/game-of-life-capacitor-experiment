@@ -5,31 +5,28 @@ canvas.width = window.innerWidth - 20;
 canvas.height = window.innerHeight - 180;
 
 const game = new GameOfLifeTS(canvas);
-game.gameSetup();
+game.setup();
 
 window.onload = () => {
     let isRunning = false;
-    document.querySelector("#start-random").addEventListener("click", (e) => {
-        e.currentTarget.disabled = true;
+    document.querySelector("#start").addEventListener("click", (e) => {
         isRunning = true;
-        game.gameSetup();
-        game.arrayRandomize();
-        game.fillArray();
-        
-        const gameLoop = () => {
-            game.runGame();
-            if(isRunning) {
-                window.requestAnimationFrame(gameLoop);
-            }
-        };
-
-        window.requestAnimationFrame(gameLoop); 
     });
 
-    document.querySelector("#stop").addEventListener("click", () => {
-        document.querySelector("#start-random").disabled = false;
+    document.querySelector("#pause").addEventListener("click", () => {
         isRunning = false;
-        game.gameSetup();
     });
 
+    document.querySelector("#reset").addEventListener("click", () => {
+        isRunning = false;
+        game.randomize();
+        game.paint()        
+    });
+
+    const gameLoop = () => {
+        if(isRunning) game.run();
+        window.requestAnimationFrame(gameLoop);
+    };
+    window.requestAnimationFrame(gameLoop);
+    game.paint();
 };

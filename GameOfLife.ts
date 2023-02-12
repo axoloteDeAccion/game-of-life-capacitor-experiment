@@ -91,6 +91,7 @@ class GameOfLifeTS {
 
     setup() {
         this.initialize();
+        this.randomize();
     }
 
     run() {
